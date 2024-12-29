@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: spring-boot3-batch-sample
+    web-application-type: none
+  datasource:
+    h2metadata:
+      url: jdbc:h2:mem:batch-metadata-manage-db;DB_CLOSE_DELAY=-1
+      username: h2db
+      password: h2db
+      driverClassName: org.h2.Driver
+    business:
+      url: jdbc:postgresql://127.0.0.1:5432/people
+      username: people
+      password: password
+      driverClassName: org.postgresql.Driver
+  batch:
+    # 実行時には対象のJOBを指定必須とするため、trueとする
+    # 実行時には引数にて実行対象のjob_nameを指定する(指定しない場合にはerrorとなる）
+    # --spring.batch.job.names=job_name
+    #
+    # falseとすると、アプリケーションが実行時に全てのbatchが実行される
+    # falseに設定したい場合には、propertyを変更するのではなく、実行引数にて指定すること
+    # --spring.batch.job.enabled=true
+    # SEE: https://docs.spring.io/spring-boot/how-to/batch.html#howto.batch.running-jobs-on-startup
+    job:
+      enabled: true
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: true

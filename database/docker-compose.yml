@@ -1,0 +1,12 @@
+services:
+  postgresql:
+    image: postgres:17
+    container_name: user-db
+    ports:
+        - "5432:5432"
+    volumes:
+      - ./data/:/docker-entrypoint-initdb.d/
+    environment:
+        POSTGRES_USER: people
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: people
